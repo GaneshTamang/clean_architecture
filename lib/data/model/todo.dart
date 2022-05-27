@@ -15,3 +15,5 @@ class TodoModel {
     description = json["description"] ?? "";
   }
 }
+
+// Object Relational Mappping (ORM)
