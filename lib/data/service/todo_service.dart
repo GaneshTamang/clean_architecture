@@ -15,18 +15,22 @@ class TodoService {
     return [];
   }
 
-  addTodo(TodoModel todoModel) async {
+  addTodo(TodoModel todoModel, BuildContext context) async {
     try {
-      var data = {
+      Map data = {
         "title": todoModel.title,
         "description": todoModel.description
       };
       Response response =
           await _dio.post("http://192.168.0.108:3000/todos", data: data);
-      print(response.data);
       return response.data;
     } on DioError catch (e) {
-      print(e.message);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.message),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 }
