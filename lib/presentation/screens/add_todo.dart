@@ -1,6 +1,8 @@
 import 'package:cleanarchitecture/data/model/todo.dart';
 import 'package:cleanarchitecture/data/service/todo_service.dart';
+import 'package:cleanarchitecture/presentation/screens/home.dart';
 import 'package:flutter/material.dart';
+//page and class for add icon
 
 class AddTodoPage extends StatelessWidget {
   AddTodoPage({Key? key}) : super(key: key);
@@ -8,6 +10,7 @@ class AddTodoPage extends StatelessWidget {
   final TextEditingController _desc = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    //media query and  for padding always put top
     final size = MediaQuery.of(context).size;
     final padding = MediaQuery.of(context).padding.top;
     return GestureDetector(
@@ -45,6 +48,11 @@ class AddTodoPage extends StatelessWidget {
                         TodoModel(title: _title.text, description: _desc.text);
                     TodoService service = TodoService();
                     service.addTodo(todoModel, context);
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (_) => const HomePage(),
+                      ),
+                    );
                   },
                   child: const Text("Submit"),
                 ),
